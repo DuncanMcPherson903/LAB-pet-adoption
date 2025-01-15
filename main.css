@@ -1,0 +1,37 @@
+.card {
+  margin: 10px 30px !important;
+  text-align: center !important;
+  padding: 0px !important;
+}
+
+.card-header {
+  text-align: center !important;
+}
+
+.card-footer {
+  text-align: center !important;
+}
+
+.cat{
+  background-color: lightblue !important;
+  color: blue !important;
+}
+
+.dog{
+  background-color: lightgreen !important;
+  color: green !important;
+}
+
+.dino{
+  background-color: lightyellow !important;
+  color: orange !important;
+}
+
+h1{
+  font-size: x-large !important;
+  margin-bottom: 0 !important;
+}
+
+h2{
+  font-size: x-large !important;
+}

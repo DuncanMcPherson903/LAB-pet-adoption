@@ -1,11 +1,9 @@
-body {
-  background-image: url("https://www.color-meanings.com/wp-content/uploads/2021/12/Cool-Colors-3629.jpeg");
-
-  height: 100%;
-
+body, html {
+  background-image: linear-gradient(white, lightblue);
+  height: 100%; 
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; 
+  background-size: cover;
 }
 
 img {

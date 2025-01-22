@@ -1,9 +1,15 @@
-body, html {
-  background-image: linear-gradient(white, lightblue);
-  height: 100%; 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+body {
+  background-image: linear-gradient(white, purple);
+  background-position: cover;
+  min-height: 100vh;
+}
+
+.interactive-header {
+  display: flex;
+  justify-content: center;
+  margin-left: 30px;
+  margin-right: 30px;
+  flex-direction: row;
 }
 
 img {
@@ -60,6 +66,13 @@ h2{
   font-size: x-large !important;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 30px;
+}
+
 .button-row {
   display: flex;
   flex-direction: row;
@@ -70,6 +83,8 @@ h2{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .button {

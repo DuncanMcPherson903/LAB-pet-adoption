@@ -266,6 +266,9 @@ const pets = [
         <div class="card-footer ${petType}">
           <p style="font-size: x-large;margin-bottom: 0">${pet.type}</p>
         </div>
+        <div>
+          <button id="del-btn--${pet.id}" class="button" style="background-color: red;">DELETE</button>
+        </div>
       </div>`;
     }
   
@@ -289,25 +292,82 @@ const pets = [
   const dogsButton = document.querySelector("#dog-btn");
   const dinosButton = document.querySelector("#dino-btn");
   const allPetsButton = document.querySelector("#all-btn");
+  let currentFilter = null;
 
   catsButton.addEventListener("click", () => {
     const catPets = filter(pets, "cat");
     cardsOnDom(catPets);
-    console.log("cat button clicked")
+    console.log("cat button clicked");
+    currentFilter = "cats";
   });
 
   dogsButton.addEventListener("click", () => {
     const dogPets = filter(pets, "dog");
     cardsOnDom(dogPets);
-    console.log("dog button clicked")
+    console.log("dog button clicked");
+    currentFilter = "dogs";
   });
 
   dinosButton.addEventListener("click", () => {
     const dinoPets = filter(pets, "dino");
     cardsOnDom(dinoPets);
     console.log("dino button clicked")
+    currentFilter = "dinos";
   });
 
   allPetsButton.addEventListener("click", () => {
     cardsOnDom(pets);
+    currentFilter = pets;
   });
+
+  const form = document.querySelector("form");
+
+  const addPet = (e) => {
+    e.preventDefault();
+    const newPet = {
+      id: pets.length + 1,
+      name: document.querySelector("#name").value,
+      color: document.querySelector("#color").value,
+      specialSkill: document.querySelector("#skill").value,
+      type: document.querySelector("#type").value,
+      imageUrl: document.querySelector("#image").value,
+    }
+    pets.push(newPet);
+    if (currentFilter === "cats") {
+      const catPets = filter(pets, "cat");
+      cardsOnDom(catPets);
+    } else if (currentFilter === "dogs") {
+      const dogPets = filter(pets, "dog");
+      cardsOnDom(dogPets);
+    } else if (currentFilter === "dinos") {
+      const dinoPets = filter(pets, "dino");
+      cardsOnDom(dinoPets);
+    } else {
+      cardsOnDom(pets);
+    }
+    form.reset();
+  }
+
+  form.addEventListener('submit', addPet);
+
+  const app = document.querySelector("#app");
+
+  app.addEventListener("click", (e) => {
+    if (e.target.id.includes("del")) {
+      const [, id] = e.target.id.split("--");
+      const index = pets.findIndex(e => e.id === Number(id));
+      pets.splice(index, 1);
+      if (currentFilter === "cats") {
+        const catPets = filter(pets, "cat");
+        cardsOnDom(catPets);
+      } else if (currentFilter === "dogs") {
+        const dogPets = filter(pets, "dog");
+        cardsOnDom(dogPets);
+      } else if (currentFilter === "dinos") {
+        const dinoPets = filter(pets, "dino");
+        cardsOnDom(dinoPets);
+      } else {
+        cardsOnDom(pets);
+      }
+    }
+  })

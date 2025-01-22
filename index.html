@@ -8,16 +8,42 @@
   <title>Pet Adoption</title>
 </head>
 <body>
-  <div class="button-column">
-    <div class="button-row" style="padding-right: 11px;">
-      <button id="all-btn" class="button" style="background-color: black;">All Pets</button>
-    </div>
-    <div class="button-row">
-      <button id="cat-btn" class="button" style="background-color: rgb(7, 118, 223);">Cats</button>
-      <button id="dog-btn" class="button" style="background-color: rgb(3, 124, 3);">Dogs</button>
-      <button id="dino-btn" class="button" style="background-color: rgb(255, 185, 32);">Dinos</button>
+  <div class="interactive-header">
+    <form>
+      <div class="field">
+        <label for="name">Name: </label>
+        <input type="text" id="name"><br>
+      </div>
+      <div class="field">
+        <label for="color">Color: </label>
+        <input type="text" id="color"><br>
+      </div>
+      <div class="field">
+        <label for="skill">Special Skill: </label>
+        <input type="text" id="skill"><br>
+      </div>
+      <div class="field">
+        <label for="type">Type: </label>
+        <input type="text" id="type"><br>
+      </div>
+      <div class="field">
+        <label for="image">Image: </label>
+        <input type="text" id="image"><br><br>
+      </div>
+      <input type="submit" value="Submit" id="submit-Btn">
+    </form> 
+    <div class="button-column">
+      <div class="button-row" style="padding-right: 11px;">
+        <button id="all-btn" class="button" style="background-color: black;">All Pets</button>
+      </div>
+      <div class="button-row">
+        <button id="cat-btn" class="button" style="background-color: rgb(7, 118, 223);">Cats</button>
+        <button id="dog-btn" class="button" style="background-color: rgb(3, 124, 3);">Dogs</button>
+        <button id="dino-btn" class="button" style="background-color: rgb(255, 185, 32);">Dinos</button>
+      </div>
     </div>
   </div>
+  
   
   
   <div id="app" class="row main-content"></div>

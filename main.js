@@ -149,7 +149,7 @@ const pets = [
       color: "Blue",
       specialSkill: "Listens attentively to boring stories.",
       type: "dog",
-      imageUrl: "http://dailynewsdig.com/wp-content/uploads/2014/03/Creative-And-Funny-Dog-Stock-Photography-Pictures-2.jpg"
+      imageUrl: "https://cdn2.psychologytoday.com/assets/styles/manual_crop_16_9_1200x675/public/field_blog_entry_teaser_image/2020-06/angry_chihuahua.png.jpg?itok=M2aLtYVc"
     },
     {
       id: 20,
@@ -241,15 +241,16 @@ const pets = [
     }
   ];
 
+  // Places a string of HTML code (htmlToRender) within a div of a given ID (divID)
   const renderToDom = (divId, htmlToRender) => {
     const selectedDiv = document.querySelector(divId);
     selectedDiv.innerHTML = htmlToRender;
   };
 
+  // Takes an array that matches a pet object, and inserts the values into a string which is rendered to the DOM
   const cardsOnDom = (array) => {
     let domString = "";
     for (const pet of array) {
-      let petType = pet.type;
       domString += 
       `<div class="card" style="width: 18rem;">
         <div class="card-header">
@@ -263,7 +264,7 @@ const pets = [
           <h2 class="card-title">${pet.color}</h2>
           <p class="card-text">${pet.specialSkill}</p>
         </div>
-        <div class="card-footer ${petType}">
+        <div class="card-footer ${pet.type}">
           <p style="font-size: x-large;margin-bottom: 0">${pet.type}</p>
         </div>
         <div>
@@ -275,6 +276,7 @@ const pets = [
     renderToDom("#app", domString);
   };
 
+  // Returns an array which has been filtered to only include items of a certain type (typeString)
   const filter = (array, typeString) => {
     const typeArray = [];
   
@@ -287,7 +289,7 @@ const pets = [
     return typeArray;
   };
 
-
+  //each button filters pets by type, then renders only those pets to the dom
   const catsButton = document.querySelector("#cat-btn");
   const dogsButton = document.querySelector("#dog-btn");
   const dinosButton = document.querySelector("#dino-btn");
@@ -320,19 +322,8 @@ const pets = [
     currentFilter = pets;
   });
 
-  const form = document.querySelector("form");
-
-  const addPet = (e) => {
-    e.preventDefault();
-    const newPet = {
-      id: pets.length + 1,
-      name: document.querySelector("#name").value,
-      color: document.querySelector("#color").value,
-      specialSkill: document.querySelector("#skill").value,
-      type: document.querySelector("#type").value,
-      imageUrl: document.querySelector("#image").value,
-    }
-    pets.push(newPet);
+  // This renders only the currently filtered pets to the dom
+  const filteredCardsOnDom = () => {
     if (currentFilter === "cats") {
       const catPets = filter(pets, "cat");
       cardsOnDom(catPets);
@@ -345,6 +336,23 @@ const pets = [
     } else {
       cardsOnDom(pets);
     }
+  }
+  
+  const form = document.querySelector("form");
+
+  // This will add a new pet to the list and re-render the currently filtered dom
+  const addPet = (e) => {
+    e.preventDefault();
+    const newPet = {
+      id: pets.length + 1,
+      name: document.querySelector("#name").value,
+      color: document.querySelector("#color").value,
+      specialSkill: document.querySelector("#skill").value,
+      type: document.querySelector("#type").value,
+      imageUrl: document.querySelector("#image").value,
+    }
+    pets.push(newPet);
+    filteredCardsOnDom();
     form.reset();
   }
 
@@ -352,22 +360,12 @@ const pets = [
 
   const app = document.querySelector("#app");
 
+  // This deletes a single card from pets, then re-renders the currently filtered dom
   app.addEventListener("click", (e) => {
     if (e.target.id.includes("del")) {
       const [, id] = e.target.id.split("--");
       const index = pets.findIndex(e => e.id === Number(id));
       pets.splice(index, 1);
-      if (currentFilter === "cats") {
-        const catPets = filter(pets, "cat");
-        cardsOnDom(catPets);
-      } else if (currentFilter === "dogs") {
-        const dogPets = filter(pets, "dog");
-        cardsOnDom(dogPets);
-      } else if (currentFilter === "dinos") {
-        const dinoPets = filter(pets, "dino");
-        cardsOnDom(dinoPets);
-      } else {
-        cardsOnDom(pets);
-      }
+      filteredCardsOnDom();
     }
   })
